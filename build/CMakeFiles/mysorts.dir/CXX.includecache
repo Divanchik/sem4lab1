@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/dimadivan/C++Projects/sem4lab1/mysorts.cpp
+iostream
+-
+cstdlib
+-
+mysorts.h
+/home/dimadivan/C++Projects/sem4lab1/mysorts.h
+
+/home/dimadivan/C++Projects/sem4lab1/mysorts.h
+

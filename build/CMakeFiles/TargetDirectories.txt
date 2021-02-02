@@ -1,0 +1,4 @@
+/home/dimadivan/C++Projects/sem4lab1/build/CMakeFiles/rebuild_cache.dir
+/home/dimadivan/C++Projects/sem4lab1/build/CMakeFiles/edit_cache.dir
+/home/dimadivan/C++Projects/sem4lab1/build/CMakeFiles/four_sorts.dir
+/home/dimadivan/C++Projects/sem4lab1/build/CMakeFiles/mysorts.dir

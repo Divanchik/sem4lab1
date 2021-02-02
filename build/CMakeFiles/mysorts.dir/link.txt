@@ -1,0 +1,2 @@
+/bin/ar qc libmysorts.a  CMakeFiles/mysorts.dir/mysorts.cpp.o
+/bin/ranlib libmysorts.a
