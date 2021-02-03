@@ -20,6 +20,7 @@ int main()
     bubble_sort(a, SIZE);
     shell_sort(a, SIZE);
     quick_sort(a, SIZE);
-    getchar();
+    std::cout << "Program is over!" << std::endl;
+    //getchar();
     return 0;
 }

@@ -1,2 +1,2 @@
-/bin/ar qc libmysorts.a  CMakeFiles/mysorts.dir/mysorts.cpp.o
-/bin/ranlib libmysorts.a
+C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\ar.exe qc libmysorts.a CMakeFiles/mysorts.dir/mysorts.cpp.obj
+C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\ranlib.exe libmysorts.a

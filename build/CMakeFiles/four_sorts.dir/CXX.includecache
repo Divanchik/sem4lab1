@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/dimadivan/C++Projects/sem4lab1/main.cpp
+C:/Users/Lenovo/Desktop/sem4lab1/main.cpp
 iostream
 -
 cstdlib
@@ -14,7 +14,7 @@ cstdlib
 ctime
 -
 mysorts.h
-/home/dimadivan/C++Projects/sem4lab1/mysorts.h
+C:/Users/Lenovo/Desktop/sem4lab1/mysorts.h
 
-/home/dimadivan/C++Projects/sem4lab1/mysorts.h
+C:/Users/Lenovo/Desktop/sem4lab1/mysorts.h
 

@@ -1,12 +1,12 @@
 [
 {
-  "directory": "/home/dimadivan/C++Projects/sem4lab1/build",
-  "command": "/bin/g++-9    -g   -o CMakeFiles/four_sorts.dir/main.cpp.o -c /home/dimadivan/C++Projects/sem4lab1/main.cpp",
-  "file": "/home/dimadivan/C++Projects/sem4lab1/main.cpp"
+  "directory": "C:/Users/Lenovo/Desktop/sem4lab1/build",
+  "command": "C:\\PROGRA~1\\MINGW-~1\\X86_64~1.0-P\\mingw64\\bin\\G__~1.EXE   -g -o CMakeFiles\\mysorts.dir\\mysorts.cpp.obj -c C:\\Users\\Lenovo\\Desktop\\sem4lab1\\mysorts.cpp",
+  "file": "C:/Users/Lenovo/Desktop/sem4lab1/mysorts.cpp"
 },
 {
-  "directory": "/home/dimadivan/C++Projects/sem4lab1/build",
-  "command": "/bin/g++-9    -g   -o CMakeFiles/mysorts.dir/mysorts.cpp.o -c /home/dimadivan/C++Projects/sem4lab1/mysorts.cpp",
-  "file": "/home/dimadivan/C++Projects/sem4lab1/mysorts.cpp"
+  "directory": "C:/Users/Lenovo/Desktop/sem4lab1/build",
+  "command": "C:\\PROGRA~1\\MINGW-~1\\X86_64~1.0-P\\mingw64\\bin\\G__~1.EXE   -g -o CMakeFiles\\four_sorts.dir\\main.cpp.obj -c C:\\Users\\Lenovo\\Desktop\\sem4lab1\\main.cpp",
+  "file": "C:/Users/Lenovo/Desktop/sem4lab1/main.cpp"
 }
 ]

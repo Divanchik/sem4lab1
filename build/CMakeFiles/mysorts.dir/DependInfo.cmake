@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/dimadivan/C++Projects/sem4lab1/mysorts.cpp" "/home/dimadivan/C++Projects/sem4lab1/build/CMakeFiles/mysorts.dir/mysorts.cpp.o"
+  "C:/Users/Lenovo/Desktop/sem4lab1/mysorts.cpp" "C:/Users/Lenovo/Desktop/sem4lab1/build/CMakeFiles/mysorts.dir/mysorts.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

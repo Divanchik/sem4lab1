@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/dimadivan/C++Projects/sem4lab1/main.cpp" "/home/dimadivan/C++Projects/sem4lab1/build/CMakeFiles/four_sorts.dir/main.cpp.o"
+  "C:/Users/Lenovo/Desktop/sem4lab1/main.cpp" "C:/Users/Lenovo/Desktop/sem4lab1/build/CMakeFiles/four_sorts.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -14,7 +14,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/dimadivan/C++Projects/sem4lab1/build/CMakeFiles/mysorts.dir/DependInfo.cmake"
+  "C:/Users/Lenovo/Desktop/sem4lab1/build/CMakeFiles/mysorts.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.
