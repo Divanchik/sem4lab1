@@ -1,8 +1,10 @@
 #include <iostream>
+#include <iomanip>
 #include <cstdlib>
+#include <ctime>
 #include "mysorts.h"
 
-bool check(const int *data, const size_t size)
+bool check(const int *data, const size_t size) // check if array is sorted
 {
     if (size < 2)
         return true;
@@ -12,7 +14,7 @@ bool check(const int *data, const size_t size)
     return true;
 }
 
-void output(const int *data, const size_t size)
+void output(const int *data, const size_t size) // array output
 {
     std::cout << "[";
     for (size_t i = 0; i < size - 1; i++)
@@ -20,7 +22,7 @@ void output(const int *data, const size_t size)
     std::cout << data[size - 1] << "]" << std::endl;
 }
 
-int min_int(const int *data, const size_t size)
+int min_int(const int *data, const size_t size) // minimum element
 {
     int min = data[0];
     for (size_t i = 1; i < size; i++)
@@ -29,7 +31,7 @@ int min_int(const int *data, const size_t size)
     return min;
 }
 
-size_t min_ind(const int *data, const size_t size)
+size_t min_ind(const int *data, const size_t size) // index of minimum element
 {
     size_t ind = 0;
     for (size_t i = 1; i < size; i++)
@@ -40,25 +42,35 @@ size_t min_ind(const int *data, const size_t size)
 
 void selection_sort(const int *data, const size_t size)
 {
+    std::clock_t st_time = std::clock(); // start time
+    // creating copy of initial array
     auto res = new int[size];
     for (size_t i = 0; i < size; i++)
         res[i] = data[i];
+    // algorithm
     std::cout << "Executing selection sort..." << std::endl;
     for (size_t i = 0; i < size - 1; i++)
-    {
         std::swap(res[i], res[i + min_ind(res + i, size - i)]);
-        if (check(res, size))
-            break;
-    }
     std::cout << "Result: ";
     output(res, size);
+
+    std::clock_t en_time = std::clock(); // end time
+    if (en_time - st_time == 0)
+        std::cout << "runtime is equal zero or can't be measured" << std::endl;
+    else
+        std::cout << std::fixed << std::setprecision(4) << "runtime = " << 1.0 * (en_time-st_time)/CLOCKS_PER_SEC << "sec" << std::endl;
+
+    std::cout << std::endl;
 }
 
 void bubble_sort(const int *data, const size_t size)
 {
+    std::clock_t st_time = std::clock(); // start time
+    // creating copy of initial array
     auto res = new int[size];
     for (size_t i = 0; i < size; i++)
         res[i] = data[i];
+    // algorithm
     std::cout << "Executing bubble sort..." << std::endl;
     for (size_t i = size; i > 1; i--)
     {
@@ -70,13 +82,24 @@ void bubble_sort(const int *data, const size_t size)
     }
     std::cout << "Result: ";
     output(res, size);
+
+    std::clock_t en_time = std::clock(); // end time
+    if (en_time - st_time == 0)
+        std::cout << "runtime is equal zero or can't be measured" << std::endl;
+    else
+        std::cout << std::fixed << std::setprecision(4) << "runtime = " << 1.0 * (en_time-st_time)/CLOCKS_PER_SEC << "sec" << std::endl;
+
+    std::cout << std::endl;
 }
 
 void shell_sort(const int *data, const size_t size)
 {
+    std::clock_t st_time = std::clock(); // start time
+    // creating copy of initial array
     auto res = new int[size];
     for (size_t i = 0; i < size; i++)
         res[i] = data[i];
+    // algorithm
     std::cout << "Executing shell sort..." << std::endl;
     for (size_t s = size; s > 0; s /= 2)
         for (size_t i = 0; i < size; i++)
@@ -85,6 +108,14 @@ void shell_sort(const int *data, const size_t size)
                     std::swap(res[i], res[j]);
     std::cout << "Result: ";
     output(res, size);
+    
+    std::clock_t en_time = std::clock(); // end time
+    if (en_time - st_time == 0)
+        std::cout << "runtime is equal zero or can't be measured" << std::endl;
+    else
+        std::cout << std::fixed << std::setprecision(4) << "runtime = " << 1.0 * (en_time-st_time)/CLOCKS_PER_SEC << "sec" << std::endl;
+
+    std::cout << std::endl;
 }
 
 void split(int* data, const size_t size)
@@ -121,11 +152,22 @@ void split(int* data, const size_t size)
 
 void quick_sort(const int *data, const size_t size)
 {
+    std::clock_t st_time = std::clock(); // start time
+    // creating copy of initial array
     auto res = new int[size];
     for (size_t i = 0; i < size; i++)
         res[i] = data[i];
+    // algorithm
     std::cout << "Executing quick sort..." << std::endl;
     split(res, size);
     std::cout << "Result: ";
     output(res, size);
+    
+    std::clock_t en_time = std::clock(); // end time
+    if (en_time - st_time == 0)
+        std::cout << "runtime is equal zero or can't be measured" << std::endl;
+    else
+        std::cout << std::fixed << std::setprecision(4) << "runtime = " << 1.0 * (en_time-st_time)/CLOCKS_PER_SEC << "sec" << std::endl;
+
+    std::cout << std::endl;
 }

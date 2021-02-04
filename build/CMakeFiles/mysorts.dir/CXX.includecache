@@ -9,7 +9,11 @@
 C:/Users/Lenovo/Desktop/sem4lab1/mysorts.cpp
 iostream
 -
+iomanip
+-
 cstdlib
+-
+ctime
 -
 mysorts.h
 C:/Users/Lenovo/Desktop/sem4lab1/mysorts.h
