@@ -22,15 +22,6 @@ void output(const int *data, const size_t size) // array output
     std::cout << data[size - 1] << "]" << std::endl;
 }
 
-int min_int(const int *data, const size_t size) // minimum element
-{
-    int min = data[0];
-    for (size_t i = 1; i < size; i++)
-        if (data[i] < min)
-            min = data[i];
-    return min;
-}
-
 size_t min_ind(const int *data, const size_t size) // index of minimum element
 {
     size_t ind = 0;
@@ -51,14 +42,14 @@ void selection_sort(const int *data, const size_t size)
     std::cout << "Executing selection sort..." << std::endl;
     for (size_t i = 0; i < size - 1; i++)
         std::swap(res[i], res[i + min_ind(res + i, size - i)]);
-    std::cout << "Result: ";
-    output(res, size);
+    // std::cout << "Result: ";
+    // output(res, size);
 
     std::clock_t en_time = std::clock(); // end time
     if (en_time - st_time == 0)
         std::cout << "runtime is equal zero or can't be measured" << std::endl;
     else
-        std::cout << std::fixed << std::setprecision(4) << "runtime = " << 1.0 * (en_time-st_time)/CLOCKS_PER_SEC << "sec" << std::endl;
+        std::cout << std::fixed << std::setprecision(4) << "runtime = " << 1.0 * (en_time - st_time) / CLOCKS_PER_SEC << "sec" << std::endl;
 
     std::cout << std::endl;
 }
@@ -74,20 +65,18 @@ void bubble_sort(const int *data, const size_t size)
     std::cout << "Executing bubble sort..." << std::endl;
     for (size_t i = size; i > 1; i--)
     {
-        if (check(res, size))
-            break;
         for (size_t j = 0; j < i - 1; j++)
             if (res[j] > res[j + 1])
                 std::swap(res[j], res[j + 1]);
     }
-    std::cout << "Result: ";
-    output(res, size);
+    // std::cout << "Result: ";
+    // output(res, size);
 
     std::clock_t en_time = std::clock(); // end time
     if (en_time - st_time == 0)
         std::cout << "runtime is equal zero or can't be measured" << std::endl;
     else
-        std::cout << std::fixed << std::setprecision(4) << "runtime = " << 1.0 * (en_time-st_time)/CLOCKS_PER_SEC << "sec" << std::endl;
+        std::cout << std::fixed << std::setprecision(4) << "runtime = " << 1.0 * (en_time - st_time) / CLOCKS_PER_SEC << "sec" << std::endl;
 
     std::cout << std::endl;
 }
@@ -106,19 +95,19 @@ void shell_sort(const int *data, const size_t size)
             for (size_t j = i + s; j < size; j += s)
                 if (res[i] > res[j])
                     std::swap(res[i], res[j]);
-    std::cout << "Result: ";
-    output(res, size);
-    
+    // std::cout << "Result: ";
+    // output(res, size);
+
     std::clock_t en_time = std::clock(); // end time
     if (en_time - st_time == 0)
         std::cout << "runtime is equal zero or can't be measured" << std::endl;
     else
-        std::cout << std::fixed << std::setprecision(4) << "runtime = " << 1.0 * (en_time-st_time)/CLOCKS_PER_SEC << "sec" << std::endl;
+        std::cout << std::fixed << std::setprecision(4) << "runtime = " << 1.0 * (en_time - st_time) / CLOCKS_PER_SEC << "sec" << std::endl;
 
     std::cout << std::endl;
 }
 
-void split(int* data, const size_t size)
+void split(int *data, const size_t size)
 {
     if (check(data, size))
         return;
@@ -145,9 +134,10 @@ void split(int* data, const size_t size)
             rind--;
     }
     size_t point = 0;
-    while(data[point] < tmp) point++;
+    while (data[point] < tmp)
+        point++;
     split(data, point);
-    split(data+point, size-point);
+    split(data + point, size - point);
 }
 
 void quick_sort(const int *data, const size_t size)
@@ -160,14 +150,14 @@ void quick_sort(const int *data, const size_t size)
     // algorithm
     std::cout << "Executing quick sort..." << std::endl;
     split(res, size);
-    std::cout << "Result: ";
-    output(res, size);
-    
+    // std::cout << "Result: ";
+    // output(res, size);
+
     std::clock_t en_time = std::clock(); // end time
     if (en_time - st_time == 0)
         std::cout << "runtime is equal zero or can't be measured" << std::endl;
     else
-        std::cout << std::fixed << std::setprecision(4) << "runtime = " << 1.0 * (en_time-st_time)/CLOCKS_PER_SEC << "sec" << std::endl;
+        std::cout << std::fixed << std::setprecision(4) << "runtime = " << 1.0 * (en_time - st_time) / CLOCKS_PER_SEC << "sec" << std::endl;
 
     std::cout << std::endl;
 }
