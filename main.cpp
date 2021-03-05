@@ -17,14 +17,20 @@ int main()
     for (int i = 0; i < SIZE - 1; i++)
         std::swap(a[i], a[i + rand() % (SIZE - i)]);
 
-    std::cout << "Initial array: " << SIZE << " elements" << std::endl;
-    // output(a, SIZE);
     selection_sort(a, SIZE);
     bubble_sort(a, SIZE);
     shell_sort(a, SIZE);
     quick_sort(a, SIZE);
 
+    int a1[] = {5, 3, 0};
+    int b1[] = {4, 2, 1};
+    int* c = merge(a1,3,b1,3, false, false, false);
+    std::cout << std::endl;
+    for (int i=0;i<5;i++)
+        std::cout << c[i] << ", ";
+    std::cout << c[5] << std::endl;
+
     std::clock_t en_time = std::clock();
-    std::cout << std::fixed << std::setprecision(10) << "program runtime = " << 1.0 * (en_time - st_time) / CLOCKS_PER_SEC << "sec" << std::endl;
+    std::cout << std::fixed << std::setprecision(4) << "program runtime = " << 1.0 * (en_time - st_time) / CLOCKS_PER_SEC << "sec" << std::endl;
     return 0;
 }

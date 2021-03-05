@@ -113,24 +113,23 @@ void split(int *data, const size_t size)
         return;
     size_t piv = rand() % size;
     int tmp = data[piv];
-    // std::cout << "Pivot: res[" << piv << "] = " << data[piv] << std::endl;
     size_t lind = 0, rind = size - 1;
     while (lind < rind)
     {
-        if (data[lind] < data[piv] && data[rind] >= data[piv])
+        if (data[lind] < tmp && data[rind] >= tmp)
         {
             lind++;
             rind--;
         }
-        else if (data[lind] >= data[piv] && data[rind] < data[piv])
+        else if (data[lind] >= tmp && data[rind] < tmp)
         {
             std::swap(data[lind], data[rind]);
             lind++;
             rind--;
         }
-        else if (data[lind] < data[piv] && data[rind] < data[piv])
+        else if (data[lind] < tmp && data[rind] < tmp)
             lind++;
-        else if (data[lind] >= data[piv] && data[rind] >= data[piv])
+        else if (data[lind] >= tmp && data[rind] >= tmp)
             rind--;
     }
     size_t point = 0;
@@ -160,4 +159,65 @@ void quick_sort(const int *data, const size_t size)
         std::cout << std::fixed << std::setprecision(4) << "runtime = " << 1.0 * (en_time - st_time) / CLOCKS_PER_SEC << "sec" << std::endl;
 
     std::cout << std::endl;
+}
+
+// 0 3 5
+// 1 2 4
+// dci = -1, ci = 5
+// 
+int *merge(const int *a_data, size_t a_size, const int *b_data, size_t b_size, bool a_fwd, bool b_fwd, bool c_fwd)
+{
+    size_t c_size = a_size + b_size;
+    int *c_data = new int[c_size];
+    int ai = 0, bi = 0, ci = 0;
+    int dai = 1, dbi = 1, dci = 1;
+    if (!(a_fwd))
+    {
+        dai = -1;
+        ai = a_size - 1;
+    }
+    if (!(b_fwd))
+    {
+        dbi = -1;
+        bi = b_size - 1;
+    }
+    if (!(c_fwd))
+    {
+        dci = -1;
+        ci = c_size - 1;
+    }
+    std::cout << "a_size: " << a_size << "\tb_size: " << b_size << "\tc_size: " << c_size << std::endl;
+    while (ci >= 0 && ci < c_size)
+    {
+        std::cout << "ai: " << ai << "\t bi: " << bi << "\t ci: " << ci << std::endl;
+        if ((ai < 0 || ai >= a_size) && bi >= 0 && bi < b_size)
+        {
+            std::cout << "ai is out" << std::endl;
+            c_data[ci] = b_data[bi];
+            bi += dbi;
+        }
+        else if (ai >= 0 && ai < a_size && (bi < 0 || bi >= b_size))
+        {
+            std::cout << "bi is out" << std::endl;
+            c_data[ci] = a_data[ai];
+            ai += dai;
+        }
+        else if (a_data[ai] < b_data[bi])
+        {
+            std::cout << a_data[ai] << " < " << b_data[bi] << std::endl;
+            c_data[ci] = a_data[ai];
+            ai += dai;
+        }
+        else
+        {
+            std::cout << a_data[ai] << " >= " << b_data[bi] << std::endl;
+            c_data[ci] = b_data[bi];
+            bi += dbi;
+        }
+        for (int i=0;i<c_size - 1;i++)
+            std::cout << c_data[i] << ", ";
+        std::cout << c_data[c_size - 1] <<  std::endl;
+        ci += dci;
+    }
+    return c_data;
 }
