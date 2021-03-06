@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cstdlib>
+#include <cstring>
 #include <ctime>
 #include "mysorts.h"
 
@@ -17,6 +18,14 @@ bool check(const int *data, const size_t size) // check if array is sorted
 void output(const int *data, const size_t size) // array output
 {
     std::cout << "[";
+    for (size_t i = 0; i < size - 1; i++)
+        std::cout << data[i] << ", ";
+    std::cout << data[size - 1] << "]" << std::endl;
+}
+
+void output(const char *name, const int *data, const size_t size) // array output
+{
+    std::cout << name << ": [";
     for (size_t i = 0; i < size - 1; i++)
         std::cout << data[i] << ", ";
     std::cout << data[size - 1] << "]" << std::endl;
@@ -161,63 +170,98 @@ void quick_sort(const int *data, const size_t size)
     std::cout << std::endl;
 }
 
-// 0 3 5
-// 1 2 4
-// dci = -1, ci = 5
-// 
-int *merge(const int *a_data, size_t a_size, const int *b_data, size_t b_size, bool a_fwd, bool b_fwd, bool c_fwd)
+bool in_arr(int n, int size)
+{
+    if (n >= 0 && n < size)
+        return true;
+    return false;
+}
+
+int *merge(const int *a_data, size_t a_size, const int *b_data, size_t b_size, int dai, int dbi, int dci)
 {
     size_t c_size = a_size + b_size;
     int *c_data = new int[c_size];
+    // set indexes
     int ai = 0, bi = 0, ci = 0;
-    int dai = 1, dbi = 1, dci = 1;
-    if (!(a_fwd))
-    {
-        dai = -1;
+    if (dai == -1)
         ai = a_size - 1;
-    }
-    if (!(b_fwd))
-    {
-        dbi = -1;
+    if (dbi == -1)
         bi = b_size - 1;
-    }
-    if (!(c_fwd))
-    {
-        dci = -1;
+    if (dci == -1)
         ci = c_size - 1;
-    }
-    std::cout << "a_size: " << a_size << "\tb_size: " << b_size << "\tc_size: " << c_size << std::endl;
-    while (ci >= 0 && ci < c_size)
+    // algorithm
+    for (; in_arr(ci, c_size); ci+=dci)
     {
-        std::cout << "ai: " << ai << "\t bi: " << bi << "\t ci: " << ci << std::endl;
-        if ((ai < 0 || ai >= a_size) && bi >= 0 && bi < b_size)
+        if (!(in_arr(ai, a_size)) && in_arr(bi, b_size))
         {
-            std::cout << "ai is out" << std::endl;
             c_data[ci] = b_data[bi];
             bi += dbi;
         }
-        else if (ai >= 0 && ai < a_size && (bi < 0 || bi >= b_size))
+        else if (in_arr(ai, a_size) && !(in_arr(bi, b_size)))
         {
-            std::cout << "bi is out" << std::endl;
             c_data[ci] = a_data[ai];
             ai += dai;
         }
         else if (a_data[ai] < b_data[bi])
         {
-            std::cout << a_data[ai] << " < " << b_data[bi] << std::endl;
             c_data[ci] = a_data[ai];
             ai += dai;
         }
         else
         {
-            std::cout << a_data[ai] << " >= " << b_data[bi] << std::endl;
             c_data[ci] = b_data[bi];
             bi += dbi;
         }
-        for (int i=0;i<c_size - 1;i++)
-            std::cout << c_data[i] << ", ";
-        std::cout << c_data[c_size - 1] <<  std::endl;
-        ci += dci;
     }
     return c_data;
+}
+
+void twoway_merge_sort(const int *data, size_t size)
+{
+    // copy initial array
+    auto res = new int[size];
+    std::memcpy(res, data, size * sizeof(int));
+    auto buf = new int[size];
+    int* merged;
+    int* cache = new int[size];
+    std::memcpy(cache, res, size * sizeof(int));
+    while (!check(res, size))
+    {
+        // search sequences
+        size_t asc = 0;
+        size_t desc = size - 1;
+        for (; res[asc] < res[asc + 1]; asc++);
+        for (; res[desc - 1] > res[desc]; desc--);
+        // merge sequences
+        size_t smerg_len = size - desc + asc + 1;                        // straight merge length
+        merged = merge(res, asc + 1, res + desc, size - desc, 1, -1, 1); // merge
+        output("straight merge", merged, smerg_len);                     // straight merge output
+        std::memcpy(buf, merged, smerg_len * sizeof(int));               // copy merge to buf
+        delete[] merged;
+        // search sequences
+        auto st = ++asc;
+        auto en = --desc;
+        for (; res[asc] < res[asc + 1]; asc++);
+        for (; res[desc - 1] > res[desc]; desc--);
+        // merge sequences
+        size_t bmerg_len = asc - st + 1 + en - desc + 1;                              // backwards merge lenght
+        merged = merge(res + st, asc - st + 1, res + desc, en - desc + 1, 1, -1, -1); // merge
+        output("backwards merge", merged, bmerg_len);                                 // backwards merge output
+        std::memcpy(buf + size - bmerg_len, merged, bmerg_len * sizeof(int));         // copy merge to buf
+        delete[] merged;
+        // everything else
+        std::memcpy(buf + smerg_len, res + asc + 1, (desc - asc - 1) * sizeof(int));
+        output("buf", buf, size);
+        std::cout << std::endl;
+        std::memcpy(res, buf, size * sizeof(int));
+        // error check
+        if (!check(res, size) && memcmp(cache, res, size) == 0)
+        {
+            std::cout << "Error: cache == res but res is NOT sorted!" << std::endl;
+            return;
+        }
+        else
+            std::memcpy(cache, res, size * sizeof(int));
+    }
+    output("res", res, size);
 }

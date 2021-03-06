@@ -13,6 +13,8 @@ iomanip
 -
 cstdlib
 -
+cstring
+-
 ctime
 -
 mysorts.h
