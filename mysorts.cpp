@@ -5,6 +5,7 @@
 #include <ctime>
 #include "mysorts.h"
 
+const char* default_name = "Array";
 bool check(const int *data, const size_t size) // check if array is sorted
 {
     if (size < 2)
@@ -15,23 +16,17 @@ bool check(const int *data, const size_t size) // check if array is sorted
     return true;
 }
 
-void output(const int *data, const size_t size) // array output
+void output(const int *data, const size_t size, const char* name = nullptr) // array output
 {
-    std::cout << "[";
-    for (size_t i = 0; i < size - 1; i++)
-        std::cout << data[i] << ", ";
-    std::cout << data[size - 1] << "]" << std::endl;
-}
-
-void output(const char *name, const int *data, const size_t size) // array output
-{
+    if (name == nullptr)
+        name = default_name;
     std::cout << name << ": [";
     for (size_t i = 0; i < size - 1; i++)
         std::cout << data[i] << ", ";
     std::cout << data[size - 1] << "]" << std::endl;
 }
 
-size_t min_ind(const int *data, const size_t size) // index of minimum element
+size_t min_index(const int *data, const size_t size) // index of minimum element
 {
     size_t ind = 0;
     for (size_t i = 1; i < size; i++)
@@ -40,79 +35,56 @@ size_t min_ind(const int *data, const size_t size) // index of minimum element
     return ind;
 }
 
-void selection_sort(const int *data, const size_t size)
+void selection_sort(int *data, const size_t size)
 {
     std::clock_t st_time = std::clock(); // start time
-    // creating copy of initial array
-    auto res = new int[size];
-    for (size_t i = 0; i < size; i++)
-        res[i] = data[i];
     // algorithm
     std::cout << "Executing selection sort..." << std::endl;
     for (size_t i = 0; i < size - 1; i++)
-        std::swap(res[i], res[i + min_ind(res + i, size - i)]);
-    // std::cout << "Result: ";
-    // output(res, size);
-
+        std::swap(data[i], data[i + min_index(data + i, size - i)]);
+    // calculate runtime
     std::clock_t en_time = std::clock(); // end time
     if (en_time - st_time == 0)
-        std::cout << "runtime is equal zero or can't be measured" << std::endl;
+        std::cout << "runtime equals zero or can't be measured" << std::endl;
     else
-        std::cout << std::fixed << std::setprecision(4) << "runtime = " << 1.0 * (en_time - st_time) / CLOCKS_PER_SEC << "sec" << std::endl;
-
+        std::cout << std::fixed << std::setprecision(3) << "runtime = " << 1.0 * (en_time - st_time) / CLOCKS_PER_SEC << "sec" << std::endl;
     std::cout << std::endl;
 }
 
-void bubble_sort(const int *data, const size_t size)
+void bubble_sort(int *data, const size_t size)
 {
     std::clock_t st_time = std::clock(); // start time
-    // creating copy of initial array
-    auto res = new int[size];
-    for (size_t i = 0; i < size; i++)
-        res[i] = data[i];
     // algorithm
     std::cout << "Executing bubble sort..." << std::endl;
     for (size_t i = size; i > 1; i--)
-    {
         for (size_t j = 0; j < i - 1; j++)
-            if (res[j] > res[j + 1])
-                std::swap(res[j], res[j + 1]);
-    }
-    // std::cout << "Result: ";
-    // output(res, size);
-
+            if (data[j] > data[j + 1])
+                std::swap(data[j], data[j + 1]);
+    // calculate runtime
     std::clock_t en_time = std::clock(); // end time
     if (en_time - st_time == 0)
-        std::cout << "runtime is equal zero or can't be measured" << std::endl;
+        std::cout << "runtime equals zero or can't be measured" << std::endl;
     else
-        std::cout << std::fixed << std::setprecision(4) << "runtime = " << 1.0 * (en_time - st_time) / CLOCKS_PER_SEC << "sec" << std::endl;
-
+        std::cout << std::fixed << std::setprecision(3) << "runtime = " << 1.0 * (en_time - st_time) / CLOCKS_PER_SEC << "sec" << std::endl;
     std::cout << std::endl;
 }
 
-void shell_sort(const int *data, const size_t size)
+void shell_sort(int *data, const size_t size)
 {
     std::clock_t st_time = std::clock(); // start time
-    // creating copy of initial array
-    auto res = new int[size];
-    for (size_t i = 0; i < size; i++)
-        res[i] = data[i];
     // algorithm
     std::cout << "Executing shell sort..." << std::endl;
     for (size_t s = size; s > 0; s /= 2)
         for (size_t i = 0; i < size; i++)
             for (size_t j = i + s; j < size; j += s)
-                if (res[i] > res[j])
-                    std::swap(res[i], res[j]);
-    // std::cout << "Result: ";
-    // output(res, size);
-
+                if (data[i] > data[j])
+                    std::swap(data[i], data[j]);
+    // calculate runtime
     std::clock_t en_time = std::clock(); // end time
     if (en_time - st_time == 0)
-        std::cout << "runtime is equal zero or can't be measured" << std::endl;
+        std::cout << "runtime equals zero or can't be measured" << std::endl;
     else
-        std::cout << std::fixed << std::setprecision(4) << "runtime = " << 1.0 * (en_time - st_time) / CLOCKS_PER_SEC << "sec" << std::endl;
-
+        std::cout << std::fixed << std::setprecision(3) << "runtime = " << 1.0 * (en_time - st_time) / CLOCKS_PER_SEC << "sec" << std::endl;
     std::cout << std::endl;
 }
 
@@ -148,25 +120,18 @@ void split(int *data, const size_t size)
     split(data + point, size - point);
 }
 
-void quick_sort(const int *data, const size_t size)
+void quick_sort(int *data, const size_t size)
 {
     std::clock_t st_time = std::clock(); // start time
-    // creating copy of initial array
-    auto res = new int[size];
-    for (size_t i = 0; i < size; i++)
-        res[i] = data[i];
     // algorithm
     std::cout << "Executing quick sort..." << std::endl;
-    split(res, size);
-    // std::cout << "Result: ";
-    // output(res, size);
-
+    split(data, size);
+    // calculate runtime
     std::clock_t en_time = std::clock(); // end time
     if (en_time - st_time == 0)
-        std::cout << "runtime is equal zero or can't be measured" << std::endl;
+        std::cout << "runtime equals zero or can't be measured" << std::endl;
     else
-        std::cout << std::fixed << std::setprecision(4) << "runtime = " << 1.0 * (en_time - st_time) / CLOCKS_PER_SEC << "sec" << std::endl;
-
+        std::cout << std::fixed << std::setprecision(3) << "runtime = " << 1.0 * (en_time - st_time) / CLOCKS_PER_SEC << "sec" << std::endl;
     std::cout << std::endl;
 }
 
@@ -225,7 +190,7 @@ void twoway_merge_sort(const int *data, size_t size)
     int* merged;
     int* cache = new int[size];
     std::memcpy(cache, res, size * sizeof(int));
-    while (!check(res, size))
+    while (true)
     {
         // search sequences
         size_t asc = 0;
@@ -235,7 +200,7 @@ void twoway_merge_sort(const int *data, size_t size)
         // merge sequences
         size_t smerg_len = size - desc + asc + 1;                        // straight merge length
         merged = merge(res, asc + 1, res + desc, size - desc, 1, -1, 1); // merge
-        output("straight merge", merged, smerg_len);                     // straight merge output
+        output(merged, smerg_len, "straight merge");                     // straight merge output
         std::memcpy(buf, merged, smerg_len * sizeof(int));               // copy merge to buf
         delete[] merged;
         // search sequences
@@ -246,12 +211,12 @@ void twoway_merge_sort(const int *data, size_t size)
         // merge sequences
         size_t bmerg_len = asc - st + 1 + en - desc + 1;                              // backwards merge lenght
         merged = merge(res + st, asc - st + 1, res + desc, en - desc + 1, 1, -1, -1); // merge
-        output("backwards merge", merged, bmerg_len);                                 // backwards merge output
+        output(merged, bmerg_len, "backwards merge");                                 // backwards merge output
         std::memcpy(buf + size - bmerg_len, merged, bmerg_len * sizeof(int));         // copy merge to buf
         delete[] merged;
         // everything else
         std::memcpy(buf + smerg_len, res + asc + 1, (desc - asc - 1) * sizeof(int));
-        output("buf", buf, size);
+        output(buf, size, "buf");
         std::cout << std::endl;
         std::memcpy(res, buf, size * sizeof(int));
         // error check
@@ -263,5 +228,5 @@ void twoway_merge_sort(const int *data, size_t size)
         else
             std::memcpy(cache, res, size * sizeof(int));
     }
-    output("res", res, size);
+    output(res, size, "res");
 }
